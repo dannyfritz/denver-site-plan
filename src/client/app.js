@@ -17,6 +17,8 @@ Vue.component("plan-grid", {
       return _.sortBy(this.data, function (plan) {
         if (plan.recorded_date) {
           return -moment(plan.recorded_date).unix()
+        } else if (plan.submitted_date) {
+          return -moment(plan.submitted_date).unix()
         }
       })
     }
