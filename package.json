@@ -3,17 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node bin/www.js",
-    "seed": "node bin/populate.js"
+    "start": "node bin/www.js"
   },
   "author": "Danny Fritz <dannyfritz@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
     "dotenv": "^2.0.0",
-    "express": "^4.14.0",
-    "knex": "^0.12.6",
-    "pg": "^6.1.2"
+    "express": "^4.14.0"
   }
 }
