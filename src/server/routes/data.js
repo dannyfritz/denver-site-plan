@@ -82,7 +82,7 @@ function getRecorded () {
 }
 
 function getUnderReview () {
-  if (cached.underReview && cached.underReview.date > Date.now() - DAY_IN_MS) {
+  if (cached.underReview && cached.underReview.date > Date.now() - CACHE_TTL) {
     console.log("Hit UnderReview Cache")
     return Promise.resolve(cached.underReview.value)
   }
