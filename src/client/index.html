@@ -10,7 +10,8 @@
     <div id="demo">
       <plan-grid
         :data="gridData"
-        :columns="gridColumns">
+        :columns="gridColumns"
+        :files="files">
       </plan-grid>
     </div>
     
@@ -21,12 +22,18 @@
             <th v-for="key in columns">
               {{ key | capitalize }}
             </th>
+            <th v-for="key in files">
+              {{key | capitalize}}
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="entry in organizedData">
             <td v-for="key in columns">
               {{entry[key]}}
+            </td>
+            <td v-for="key in files">
+              <a v-if="entry[key]" :href="'https://www.denvergov.org/media/gis/WebDocs/CPD/SDP_Maps/'+entry[key]">Link</a>
             </td>
           </tr>
         </tbody>

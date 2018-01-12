@@ -3,6 +3,7 @@ Vue.component("plan-grid", {
   props: {
     data: Array,
     columns: Array,
+    files: Array,
   },
   data: function () {
     return {}
@@ -33,6 +34,7 @@ var demo = new Vue({
   el: "#demo",
   data: {
     gridColumns: ["plan_name", "address", "status", "submitted_date", "recorded_date", "num_stories", "num_units", "parking_spaces", "proposed_height", "proposed_use"],
+    files: ["document"],
     gridData: gridData
   }
 })
