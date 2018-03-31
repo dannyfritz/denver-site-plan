@@ -1,5 +1,6 @@
 "use strict"
 require("dotenv").config()
+const dateFns = require("date-fns")
 const axios = require("axios")
 const Express = require("express")
 const router = new Express.Router()
@@ -27,8 +28,12 @@ function heightString (input) {
   return parseFloat(input)
 }
 
+function dateString (input) {
+  return input ? dateFns.format(new Date(input), 'MM/DD/YYYY') : ""
+}
+
 function processResults (data) {
-  return data.results.map((r) => ({
+  return data.features.map((r) => ({
     address: unstringNull(r.attributes.ADDRESS),
     address_notes: unstringNull(r.attributes.ADDRESS_NOTES),
     document: unstringNull(r.attributes.DOCUMENT),
@@ -47,9 +52,9 @@ function processResults (data) {
     proposed_height: heightString(unstringNull(r.attributes.PROPOSED_HEIGHT)),
     proposed_use: unstringNull(r.attributes.PROPOSED_USE),
     reception_num: unstringNull(r.attributes.RECEPTION_NUM),
-    recorded_date: unstringNull(r.attributes.RECORDED_DATE),
+    recorded_date: dateString(unstringNull(r.attributes.RECORDED_DATE)),
     status: unstringNull(r.attributes.STATUS),
-    submitted_date: unstringNull(r.attributes.SUBMITTED_DATE),
+    submitted_date: dateString(unstringNull(r.attributes.SUBMITTED_DATE)),
   }))
 }
 
@@ -69,7 +74,7 @@ function getRecorded () {
     console.log("Hit Recorded Cache")
     return Promise.resolve(cached.recorded.value)
   }
-  return axios.get(`${process.env.ENDPOINT}?f=json&returnGeometry=false&searchFields=STATUS&layers=1&searchText=recorded`)
+  return axios.get(`${process.env.ENDPOINT}/0/query?f=json&where=OBJECTID%20%3E%200&returnGeometry=false&outFields=*&returnCountOnly=false&orderByFields=SUBMITTED_DATE%20DESC,RECORDED_DATE%20DESC&supportsPagination=true`)
     .then(unwrapAxios)
     .then(processResults)
     .then(function (data) {
@@ -86,7 +91,7 @@ function getUnderReview () {
     console.log("Hit UnderReview Cache")
     return Promise.resolve(cached.underReview.value)
   }
-  return axios.get(`${process.env.ENDPOINT}?f=json&returnGeometry=false&searchFields=STATUS&layers=0&searchText=under%20review`)
+  return axios.get(`${process.env.ENDPOINT}/1/query?f=json&where=OBJECTID%20%3E%200&returnGeometry=false&outFields=*&returnCountOnly=false&orderByFields=SUBMITTED_DATE%20DESC,RECORDED_DATE%20DESC&supportsPagination=true`)
     .then(unwrapAxios)
     .then(processResults)
     .then(function (data) {
