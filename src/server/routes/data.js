@@ -23,13 +23,18 @@ function heightString (input) {
     const parts = input.split("'")
     const inches = parts[1]
     const feet = parseFloat(parts[0]) + Math.abs(parseFloat(inches))/12
-    return feet
+    return roundUp(feet, 2)
   }
   return parseFloat(input)
 }
 
 function dateString (input) {
   return input ? dateFns.format(new Date(input), 'MM/DD/YYYY') : ""
+}
+
+function roundUp(num, precision) {
+  precision = Math.pow(10, precision)
+  return Math.ceil(num * precision) / precision
 }
 
 function processResults (data) {
