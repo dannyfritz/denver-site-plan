@@ -16,7 +16,11 @@
     </div>
     
     <script type="text/x-template" id="grid-template">
-      <table>
+      <main>
+        <table>
+        <thead>
+          <input type="text" placeholder="Give me an address" v-model="search" />
+        </thead>
         <thead>
           <tr>
             <th v-for="key in columns">
@@ -28,7 +32,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="entry in organizedData">
+          <tr v-for="entry in filterByAddress(organizedData)">
             <td v-for="key in columns">
               {{entry[key]}}
             </td>
@@ -38,10 +42,11 @@
           </tr>
         </tbody>
       </table>
+    </main>
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script>
     <script src="app.js"></script>
   </body>
