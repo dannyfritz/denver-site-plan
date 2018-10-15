@@ -6,7 +6,7 @@ Vue.component("plan-grid", {
     files: Array,
   },
   data: function () {
-    return {}
+    return { search: '' }
   },
   filters: {
    capitalize: function (str) {
@@ -24,7 +24,11 @@ Vue.component("plan-grid", {
       })
     }
   },
-  methods: {},
+  methods: {
+    filterByAddress: function(entries) {
+       return entries.filter(entry => _.includes(_.lowerCase(entry.address), _.lowerCase(this.search)))
+    }
+  },
 })
 
 let gridData = []
