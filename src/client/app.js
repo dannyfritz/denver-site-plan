@@ -6,7 +6,7 @@ Vue.component("plan-grid", {
     files: Array,
   },
   data: function () {
-    return { search: '' }
+    return { search: "" }
   },
   filters: {
    capitalize: function (str) {
