@@ -12,5 +12,8 @@
     "date-fns": "^1.29.0",
     "dotenv": "^2.0.0",
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.7.0"
   }
 }

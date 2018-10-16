@@ -29,7 +29,7 @@ function heightString (input) {
 }
 
 function dateString (input) {
-  return input ? dateFns.format(new Date(input), 'MM/DD/YYYY') : ""
+  return input ? dateFns.format(new Date(input), "MM/DD/YYYY") : ""
 }
 
 function roundUp(num, precision) {
@@ -76,6 +76,7 @@ const CACHE_TTL = 1000  * 60 * 60 * 24
 
 function getRecorded () {
   if (cached.recorded && cached.recorded.date > Date.now() - CACHE_TTL) {
+    /* eslint-disable-next-line no-console*/
     console.log("Hit Recorded Cache")
     return Promise.resolve(cached.recorded.value)
   }
@@ -93,6 +94,7 @@ function getRecorded () {
 
 function getUnderReview () {
   if (cached.underReview && cached.underReview.date > Date.now() - CACHE_TTL) {
+    /* eslint-disable-next-line no-console*/
     console.log("Hit UnderReview Cache")
     return Promise.resolve(cached.underReview.value)
   }
