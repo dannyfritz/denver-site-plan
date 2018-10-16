@@ -34,8 +34,8 @@ Vue.component("plan-grid", {
 let gridData = []
 
 // bootstrap the demo
-var demo = new Vue({
-  el: "#demo",
+var app = new Vue({
+  el: "#app",
   data: {
     gridColumns: ["plan_name", "address", "status", "submitted_date", "recorded_date", "num_stories", "num_units", "parking_spaces", "proposed_height", "proposed_use"],
     files: ["document"],
@@ -47,4 +47,4 @@ Promise.all([
   axios.get("/data/recorded"),
   axios.get("/data/under-review"),
 ])
-  .then((responses) => demo.gridData = responses[0].data.concat(responses[1].data))
+  .then((responses) => app.gridData = responses[0].data.concat(responses[1].data))
